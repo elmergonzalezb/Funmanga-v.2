@@ -1,4 +1,3 @@
-
 #   TODO:
 #   The purpose:
 #   Clone http://www.funmanga.com
@@ -47,6 +46,6 @@ for i in range(684):
         #print(a)
         json_obj = json.loads(a)
 
-        for url in json_obj:    
+        for url in json_obj:
             print(url)
         
