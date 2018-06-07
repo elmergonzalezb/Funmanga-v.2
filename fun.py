@@ -16,7 +16,7 @@
 
 
 #   TODO:
-#   Try cloudinary api and uplad everything to the cloudinary servers 
+#   Try cloudinary api and upload everything to the cloudinary servers 
 
 from bs4 import BeautifulSoup as soup
 from requests import request
