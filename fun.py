@@ -7,6 +7,7 @@ import json
 manga_name = "Gintama"
 
 for i in range(684):
+    print(i)
     res=request("GET", "http://www.funmanga.com/" + manga_name + "/" + str(i))
 
     html_resp = res.text
