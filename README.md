@@ -13,7 +13,7 @@
 ## TODO3
 
 > Store (manga_id, status(completed or not)) in fun_ongoingstate.db
-> and (manga_id, genre_array, artist, type) in details
+> and (manga_id, genre_array, artist, type) in fun_details.db
 > eg [http://www.funmanga.com/service/manga_info/amai_yuuwaku_ootsuki_miu](http://www.funmanga.com/service/manga_info/amai_yuuwaku_ootsuki_miu)
 > There is a data-service attribute in every link and you can scrape them
 > Implement a search too
@@ -47,3 +47,23 @@ with open("python_logo.png",'wb') as f:
 # to a new file in binary mode.
     f.write(r.content)
 ```
+
+## Databases
+
+|    Database         | Contents                           |
+|---------------------|:----------------------------------:|
+| fun_imagelinks.db   | manga_id, chapter_no, image_url    |
+| fun_nameid.db       | manga_name, manga_id               |
+| fun_ongoingstate.db | manga_id, status(completed or not) |
+| fun_details.db      | manga_id, genre_array, artist, type|
+
+| Property    | Type |
+|-------------|:----:|
+| manga_id    | INT  |
+| chapter_no  | INT  |
+| image_url   | TEXT |
+| manga_name  | TEXT |
+| status      | BIT  |
+| genre_array | TEXT |
+| artist      | TEXT |
+| type        | TEXT |
