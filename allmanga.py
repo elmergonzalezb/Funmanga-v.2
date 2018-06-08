@@ -1,6 +1,10 @@
 from bs4 import BeautifulSoup as soup
 from requests import request
 from string import ascii_lowercase
+import sqlite3
+
+conn = sqlite3.connect("fun_slugid.db")
+c = conn.cursor()
 
 
 for alphabet in (" " + ascii_lowercase):

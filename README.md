@@ -8,12 +8,11 @@
 ## TODO2
 
 > Store the (manga_id, chapter_no, image_url) in fun_imagelinks.db file
-> And (manga_name, manga_id) in fun_nameid.db
+> And (manga_slug, manga_id) in fun_slugid.db
 
 ## TODO3
 
-> Store (manga_id, status(completed or not)) in fun_ongoingstate.db
-> and (manga_id, genre_array, artist, type) in fun_details.db
+> Store (manga_id, genre_array, artist, type, manga_image, status(completed or not)) in fun_details.db
 > eg [http://www.funmanga.com/service/manga_info/amai_yuuwaku_ootsuki_miu](http://www.funmanga.com/service/manga_info/amai_yuuwaku_ootsuki_miu)
 > There is a data-service attribute in every link and you can scrape them
 > Implement a search too
@@ -48,22 +47,54 @@ with open("python_logo.png",'wb') as f:
     f.write(r.content)
 ```
 
+---
+
 ## Databases
 
-|    Database         | Contents                           |
-|---------------------|:----------------------------------:|
-| fun_imagelinks.db   | manga_id, chapter_no, image_url    |
-| fun_nameid.db       | manga_name, manga_id               |
-| fun_ongoingstate.db | manga_id, status(completed or not) |
-| fun_details.db      | manga_id, genre_array, artist, type|
+|    Database         | Table Name | Contents                                                                               |
+|---------------------|:----------:|---------------------------------------------------------------------------------------:|
+| fun_imagelinks.db   | funmanga   | manga_id, chapter_no, image_url                                                        |
+| fun_slugid.db       | funmanga   | manga_slug, manga_id                                                                   |
+| fun_details.db      | funmanga   | manga_id, manga_name, genre_array, artist, type, manga_image, status(completed or not) |
+
+---
 
 | Property    | Type |
 |-------------|:----:|
 | manga_id    | INT  |
 | chapter_no  | INT  |
 | image_url   | TEXT |
+| manga_slug  | TEXT |
 | manga_name  | TEXT |
 | status      | BIT  |
 | genre_array | TEXT |
 | artist      | TEXT |
 | type        | TEXT |
+| manga_image | TEXT |
+
+---
+
+**status:**
+> 1 -> Completed
+> 0 -> Ongoing
+
+## Files
+
+### Database Files
+
+**fun_imagelinks.db:**
+> Store the (manga_id, chapter_no, image_url) in fun_imagelinks.db file
+
+**fun_slugid.db:**
+> And (manga_slug, manga_id) in fun_slugid.db
+
+**fun_details.db:**
+> Store (manga_id, genre_array, artist, type, manga_image, status(completed or not)) in fun_details.db
+
+### Python Files
+
+**databasegen.py:**
+> Generates the skelital database files and tables for sqlite3 as of (2018 May)
+
+**allmanga.py:**
+> Gets all manga links form the manga-list url and saves the manga-slugs
