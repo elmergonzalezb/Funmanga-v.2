@@ -4,7 +4,7 @@ from string import ascii_lowercase
 
 
 for alphabet in (" " + ascii_lowercase):
-    #For a-z
+    #For a-z and ""(for just "http://www.funmanga.com/manga-list/")
     req = request("GET", "http://www.funmanga.com/manga-list/" + alphabet)
     resp = req.text
 
