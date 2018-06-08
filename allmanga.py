@@ -23,8 +23,27 @@ for alphabet in (" " + ascii_lowercase):
     lis.extend(right_col.findAll("li"))
 
     for li in lis:
+
+        completed = 0
+        
         if li.span is not None:
-            print("completed")
+            completed = 1
         else:
-            print("ongoing")
-        print(li.a["href"].split("/")[-1])
+            pass
+       
+        manga_slug = li.a["href"].split("/")[-1]
+        manga_name = li.a.text
+        print(manga_name,completed)
+
+        c.execute("SELECT * FROM funmanga WHERE manga_slug = ?", [manga_slug])
+        results = c.fetchone()
+
+        if results != None and results != []:
+            print(results)
+        else:
+            c.execute("INSERT INTO funmanga (manga_slug) VALUES (?)",(manga_slug,))
+            print("inserted",manga_slug)
+    conn.commit()
+        
+c.close()
+conn.close()

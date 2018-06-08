@@ -9,6 +9,7 @@
 
 > Store the (manga_id, chapter_no, image_url) in fun_imagelinks.db file
 > And (manga_slug, manga_id) in fun_slugid.db
+> Chapter names for a manga (manga_id, chapter_no, chapter_name) in fun_chapternames.db
 
 ## TODO3
 
@@ -51,18 +52,19 @@ with open("python_logo.png",'wb') as f:
 
 ## Databases
 
-|    Database         | Table Name | Contents                                                                               |
-|---------------------|:----------:|---------------------------------------------------------------------------------------:|
-| fun_imagelinks.db   | funmanga   | manga_id, chapter_no, image_url                                                        |
-| fun_slugid.db       | funmanga   | manga_slug, manga_id                                                                   |
-| fun_details.db      | funmanga   | manga_id, manga_name, genre_array, artist, type, manga_image, status(completed or not) |
+|    Database         | Table Name | Contents                                                                                 |
+|---------------------|:----------:|-----------------------------------------------------------------------------------------:|
+| fun_imagelinks.db   | funmanga   | manga_slug, chapter_no, image_url                                                        |
+| fun_slugid.db       | funmanga   | manga_slug, manga_id                                                                     |
+| fun_chapternames.db | funmanga   | manga_slug, chapter_no, chapter_name, fun_chapter_link                                   |
+| fun_details.db      | funmanga   | manga_slug, manga_name, genre_array, artist, type, manga_image, status(completed or not) |
 
 ---
 
 | Property    | Type |
 |-------------|:----:|
 | manga_id    | INT  |
-| chapter_no  | INT  |
+| chapter_no  | REAL |
 | image_url   | TEXT |
 | manga_slug  | TEXT |
 | manga_name  | TEXT |
@@ -83,13 +85,16 @@ with open("python_logo.png",'wb') as f:
 ### Database Files
 
 **fun_imagelinks.db:**
-> Store the (manga_id, chapter_no, image_url) in fun_imagelinks.db file
+> Store the (manga_slug, chapter_no, image_url) in fun_imagelinks.db file
 
 **fun_slugid.db:**
 > And (manga_slug, manga_id) in fun_slugid.db
 
 **fun_details.db:**
-> Store (manga_id, genre_array, artist, type, manga_image, status(completed or not)) in fun_details.db
+> Store (manga_slug, genre_array, artist, type, manga_image, status(completed or not)) in fun_details.db
+
+**fun_chapternames.db:**
+> Store (manga_slug, chapter_no, chapter_name, fun_chapter_link) in fun_chapternames.db
 
 ### Python Files
 
@@ -97,4 +102,4 @@ with open("python_logo.png",'wb') as f:
 > Generates the skelital database files and tables for sqlite3 as of (2018 May)
 
 **allmanga.py:**
-> Gets all manga links form the manga-list url and saves the manga-slugs
+> Gets all manga links form the manga-list url and saves the manga-slugs and status(0 or 1)
