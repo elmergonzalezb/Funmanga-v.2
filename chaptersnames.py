@@ -20,7 +20,7 @@ for manga_slug in allmanga:
 
     results = c.fetchone()
 
-    if results != [] and results is not None:
+    if results != [] and results != None:
         print(manga_slug[0])
     else:
         
@@ -53,7 +53,13 @@ for manga_slug in allmanga:
                 if results != None and results != []:
                     print(results,"results")
                 else:
-                    chapter_no = chapter_link.split("/")[1]
+                    try:
+                        chapter_no = chapter_link.split("/")[1]
+                    except Exception as e:
+                        print("cannot split by '/'")
+                        #eg: http://www.funmanga.com/Biyaku-Cafe
+                        #This error occured
+                        print(e)
                     chapter_name = li.a.span.text.strip()
 
                     c.execute("INSERT INTO funmanga (chapter_name, fun_chapter_link, manga_slug, chapter_no) VALUES (?,?,?,?)", (chapter_name, chapter_link, manga_slug[0], chapter_no))
